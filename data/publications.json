@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Explaining Representation Learning with Perceptual Components",
+    "authors": ["Yavuz Yarici", "Kiran Kokilepersaud", "Mohit Prabhushankar", "Ghassan AlRegib"],
+    "venue": "IEEE International Conference on Image Processing (ICIP)",
+    "year": 2024,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2406.06930",
+      "Code": "https://github.com/olivesgatech/Explaining-Representation-Learning-with-Perceptual-Components"
+    }
+  },
+  {
+    "title": "Taxes Are All You Need: Integration of Taxonomical Hierarchy Relationships into the Contrastive Loss",
+    "authors": ["Kiran Kokilepersaud", "Yavuz Yarici", "Mohit Prabhushankar", "Ghassan AlRegib", "Enrique Corona", "Kunjan Singh", "Armin Parchami"],
+    "venue": "IEEE International Conference on Image Processing (ICIP)",
+    "year": 2024,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2406.06848"
+    }
+  },
+  {
+    "title": "Subject Invariant Contrastive Learning for Human Activity Recognition",
+    "authors": ["Yavuz Yarici", "Kiran Kokilepersaud", "Mohit Prabhushankar", "Ghassan AlRegib"],
+    "venue": "IEEE 35th International Workshop on Machine Learning for Signal Processing (MLSP)",
+    "year": 2025,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2507.03250",
+      "Code": "https://github.com/olivesgatech/SICL"
+    }
+  },
+  {
+    "title": "Hierarchical and Multimodal Data for Daily Activity Understanding",
+    "authors": ["Ghazal Kaviani", "Yavuz Yarici", "Seulgi Kim", "Mohit Prabhushankar", "Ghassan AlRegib", "Mashhour Solh", "Ameya Patil"],
+    "venue": "arXiv preprint",
+    "year": 2025,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2504.17696",
+      "Code": "https://github.com/olivesgatech/DARai",
+      "Website": "https://alregib.ece.gatech.edu/software-and-datasets/darai-daily-activity-recordings-for-artificial-intelligence-and-machine-learning/"
+    }
+  }
+]
