@@ -8,7 +8,7 @@
 async function loadPublications() {
     try {
         // Fetch publications data
-        const response = await fetch('data/publications.json');
+        const response = await fetch('data/publications.json?v=' + new Date().getTime());
         if (!response.ok) {
             throw new Error('Failed to load publications');
         }
