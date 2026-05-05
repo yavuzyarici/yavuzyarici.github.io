@@ -31,12 +31,22 @@
   {
     "title": "Hierarchical and Multimodal Data for Daily Activity Understanding",
     "authors": ["Ghazal Kaviani", "Yavuz Yarici", "Seulgi Kim", "Mohit Prabhushankar", "Ghassan AlRegib", "Mashhour Solh", "Ameya Patil"],
-    "venue": "arXiv preprint",
+    "venue": "Journal of Data-centric Machine Learning Research (DMLR) 3 (5), 1--30",
     "year": 2025,
     "links": {
       "PDF": "https://arxiv.org/pdf/2504.17696",
       "Code": "https://github.com/olivesgatech/DARai",
       "Website": "https://alregib.ece.gatech.edu/software-and-datasets/darai-daily-activity-recordings-for-artificial-intelligence-and-machine-learning/"
+    }
+  },
+  {
+    "title": "MER-DG: Modality-Entropy Regularization for Multimodal Domain Generalization",
+    "authors": ["Yavuz Yarici", "Ghassan AlRegib"],
+    "venue": "International Conference on Machine Learning (ICML)",
+    "year": 2026,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2605.01967",
+      "Code": "https://github.com/olivesgatech/MER-DG"
     }
   }
 ]
