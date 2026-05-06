@@ -381,8 +381,8 @@ p {
 
 .company-logo {
     flex-shrink: 0;
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -394,7 +394,7 @@ p {
 }
 
 .company-logo i {
-    font-size: 2rem;
+    font-size: 3rem;
     color: var(--secondary-color);
 }
 
@@ -476,8 +476,8 @@ p {
 
 .school-logo {
     flex-shrink: 0;
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -489,7 +489,7 @@ p {
 }
 
 .school-logo i {
-    font-size: 2rem;
+    font-size: 3rem;
     color: var(--secondary-color);
 }
 
@@ -659,13 +659,13 @@ p {
 
     .company-logo,
     .school-logo {
-        width: 60px;
-        height: 60px;
+        width: 75px;
+        height: 75px;
     }
 
     .company-logo i,
     .school-logo i {
-        font-size: 1.7rem;
+        font-size: 2.2rem;
     }
 
     .experience-header,
@@ -717,13 +717,13 @@ p {
 
     .company-logo,
     .school-logo {
-        width: 55px;
-        height: 55px;
+        width: 65px;
+        height: 65px;
     }
 
     .company-logo i,
     .school-logo i {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
 
     .social-links {
