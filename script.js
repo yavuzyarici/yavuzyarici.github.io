@@ -50,6 +50,14 @@ function updateActiveNavLink() {
     });
 }
 
+// ==================== //
+// Navbar Shadow on Scroll
+// ==================== //
+function updateNavbarShadow() {
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('scrolled', window.scrollY > 10);
+}
+
 // Update on scroll with throttling for performance
 let scrollTimeout;
 window.addEventListener('scroll', function() {
@@ -58,6 +66,7 @@ window.addEventListener('scroll', function() {
     }
     scrollTimeout = window.requestAnimationFrame(function() {
         updateActiveNavLink();
+        updateNavbarShadow();
     });
 });
 
@@ -89,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
 // Intersection Observer for Fade-in Animations
 // ==================== //
 document.addEventListener('DOMContentLoaded', function() {
+    // Respect users who have asked for reduced motion — leave content static.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+    }
+
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -118,15 +132,42 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==================== //
-// Navbar Shadow on Scroll
+// Mobile Navigation Toggle
 // ==================== //
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 10) {
-        navbar.style.boxShadow = '0 2px 12px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('.nav-menu');
+    if (!toggle || !menu) return;
+
+    function setOpen(open) {
+        menu.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
     }
+
+    toggle.addEventListener('click', function() {
+        setOpen(!menu.classList.contains('open'));
+    });
+
+    // Collapse after picking a destination
+    menu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            setOpen(false);
+        });
+    });
+
+    // Escape closes the menu and returns focus to the toggle
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
+            setOpen(false);
+            toggle.focus();
+        }
+    });
+
+    // Reset state when resizing back up to desktop, so the menu can't be
+    // left stuck in the collapsed-but-open state.
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) setOpen(false);
+    });
 });
 
 // ==================== //

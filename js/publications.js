@@ -42,19 +42,55 @@ function renderPublications(publications) {
     // Clear container
     container.innerHTML = '';
 
-    // Generate HTML for each publication
+    // Group into year buckets. The array arrives already sorted newest-first,
+    // so tracking the last-seen year is enough to emit headings in order.
+    let currentYear = null;
     publications.forEach(pub => {
-        const card = createPublicationCard(pub);
-        container.appendChild(card);
+        if (pub.year !== currentYear) {
+            currentYear = pub.year;
+            const heading = document.createElement('h3');
+            heading.className = 'pub-year';
+            heading.textContent = currentYear;
+            container.appendChild(heading);
+        }
+        container.appendChild(createPublicationCard(pub));
     });
+}
+
+/**
+ * Classifies a venue string into a category used for the card's color
+ * coding and badge. Order matters: "workshop" is checked before the
+ * generic conference fallback because workshop venue names usually
+ * contain the word "Conference" too.
+ */
+function classifyVenue(venue) {
+    const v = (venue || '').toLowerCase();
+    if (v.includes('arxiv') || v.includes('preprint')) {
+        return { type: 'preprint', label: 'Preprint' };
+    }
+    if (v.includes('journal') || v.includes('transactions')) {
+        return { type: 'journal', label: 'Journal' };
+    }
+    if (v.includes('workshop')) {
+        return { type: 'workshop', label: 'Workshop' };
+    }
+    return { type: 'conference', label: 'Conference' };
 }
 
 /**
  * Creates a publication card element
  */
 function createPublicationCard(pub) {
+    const category = classifyVenue(pub.venue);
+
     const card = document.createElement('div');
-    card.className = 'publication-card';
+    card.className = 'publication-card pub-' + category.type;
+
+    // Category pill
+    const badge = document.createElement('span');
+    badge.className = 'pub-badge';
+    badge.textContent = category.label;
+    card.appendChild(badge);
 
     // Title
     const title = document.createElement('h3');

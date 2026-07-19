@@ -40,6 +40,24 @@
     }
   },
   {
+    "title": "CRACKS: Crowdsourcing Resources for Analysis and Categorization of Key Subsurface Faults",
+    "authors": ["Mohit Prabhushankar", "Kiran Kokilepersaud", "Jorge Quesada", "Yavuz Yarici", "Chen Zhou", "Mohammad Alotaibi", "Ghassan AlRegib", "Ahmad Mustafa", "Yusufjon Kumakov"],
+    "venue": "arXiv preprint",
+    "year": 2024,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2408.11185"
+    }
+  },
+  {
+    "title": "Exploiting the Distortion-Semantic Interaction in Fisheye Data",
+    "authors": ["Kiran Kokilepersaud", "Mohit Prabhushankar", "Yavuz Yarici", "Ghassan AlRegib", "Armin Parchami"],
+    "venue": "IEEE Open Journal of Signal Processing",
+    "year": 2023,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2305.00079"
+    }
+  },
+  {
     "title": "MER-DG: Modality-Entropy Regularization for Multimodal Domain Generalization",
     "authors": ["Yavuz Yarici", "Ghassan AlRegib"],
     "venue": "International Conference on Machine Learning (ICML)",

@@ -2,20 +2,45 @@
 /* CSS Variables */
 /* ==================== */
 :root {
-    --primary-color: #333;
-    --secondary-color: #666;
-    --accent-color: #007bff;
-    --accent-hover: #0056b3;
+    /* Ink scale */
+    --primary-color: #1a1a1a;
+    --secondary-color: #5a5a5a;
+    --muted-color: #7a7a76;
+
+    /* Primary accent — change this one value to re-theme the whole site
+       (e.g. #8a2b2b crimson, #2d5016 forest, #003057 GT navy) */
+    --accent-color: #1f4e79;
+    --accent-hover: #163a5a;
+    --accent-tint: #eef3f9;
+
+    /* Warm secondary, used sparingly for emphasis */
+    --accent-warm: #8a6320;
+    --accent-warm-tint: #f9f3e7;
+
+    /* Venue categories — muted, so the coding reads as information
+       rather than decoration */
+    --venue-conf: #1f4e79;
+    --venue-conf-bg: #edf3f9;
+    --venue-journal: #0f6357;
+    --venue-journal-bg: #e9f4f1;
+    --venue-workshop: #5b4a8a;
+    --venue-workshop-bg: #f1eef8;
+    --venue-preprint: #7a6a55;
+    --venue-preprint-bg: #f5f2ec;
+
+    /* Surfaces — warm off-white rather than flat grey */
     --bg-white: #ffffff;
-    --bg-light: #f2f2f2;
-    --bg-grey: #e0e0e0;
-    --border-color: #ccc;
-    --border-light: #e5e5e5;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --bg-light: #f7f7f5;
+    --bg-grey: #eceae5;
+    --border-color: #d8d6d0;
+    --border-light: #e4e4e0;
+
+    --shadow-sm: 0 1px 2px rgba(26, 26, 26, 0.06);
+    --shadow-md: 0 2px 10px rgba(26, 26, 26, 0.07);
+    --transition: all 0.25s ease;
     --max-width: 1000px;
     --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-display: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
 }
 
 /* ==================== */
@@ -43,6 +68,13 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     line-height: 1.3;
     color: var(--primary-color);
+}
+
+/* Serif display face for top-level headings; body stays system sans */
+h1, h2, .section-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
 }
 
 h1 {
@@ -100,6 +132,22 @@ p {
     padding: 1rem 0;
     z-index: 1000;
     box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.25s ease;
+}
+
+/* Thin accent bar pinned above the nav, visible at every scroll position */
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color) 0%, #2d6ea3 45%, var(--accent-warm) 100%);
+}
+
+.navbar.scrolled {
+    box-shadow: 0 2px 12px rgba(26, 26, 26, 0.09);
 }
 
 .navbar .container {
@@ -109,10 +157,33 @@ p {
 }
 
 .nav-brand {
+    font-family: var(--font-display);
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--primary-color);
     text-decoration: none;
+}
+
+/* Hamburger — hidden on desktop, shown under 768px */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    padding: 6px 8px;
+    cursor: pointer;
+    color: var(--primary-color);
+    line-height: 0;
+}
+
+.nav-toggle svg {
+    width: 22px;
+    height: 22px;
+}
+
+.nav-toggle:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
 }
 
 .nav-brand:hover {
@@ -146,7 +217,17 @@ p {
 /* ==================== */
 .hero {
     padding: 4rem 0 3rem;
-    background: var(--bg-light);
+    position: relative;
+    background:
+        radial-gradient(ellipse 900px 400px at 15% 0%, rgba(31, 78, 121, 0.07), transparent 70%),
+        radial-gradient(ellipse 700px 350px at 90% 100%, rgba(138, 99, 32, 0.06), transparent 70%),
+        linear-gradient(180deg, #fbfbf9 0%, var(--bg-light) 100%);
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* Landing on a #hash shouldn't tuck the heading under the sticky navbar */
+section[id] {
+    scroll-margin-top: 90px;
 }
 
 .hero-content {
@@ -160,10 +241,11 @@ p {
 }
 
 .hero-image img {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
+    width: 200px;
+    height: 250px;
+    border-radius: 2px;
     object-fit: cover;
+    object-position: center 20%;
     border: 4px solid var(--bg-white);
     box-shadow: var(--shadow-md);
 }
@@ -209,14 +291,16 @@ p {
     background: var(--bg-white);
     color: var(--primary-color);
     border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border-radius: 2px;
     font-size: 0.9rem;
     font-weight: 500;
     transition: var(--transition);
 }
 
-.social-btn i {
-    font-size: 1rem;
+.social-btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
 }
 
 .social-btn:hover {
@@ -239,9 +323,20 @@ p {
 
 .section-title {
     font-size: 1.75rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.25rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--border-light);
+    position: relative;
+}
+
+/* Short accent rule instead of a full-width grey border */
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 48px;
+    height: 2px;
+    background: var(--accent-color);
 }
 
 /* ==================== */
@@ -252,8 +347,26 @@ p {
 }
 
 .about-content p {
-    text-align: justify;
+    text-align: left;
     margin-bottom: 1.5rem;
+}
+
+/* Venue callout in the selected-work list */
+.pub-venue-inline {
+    color: var(--accent-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.about-content ul {
+    margin: 0 0 1.5rem 1.25rem;
+}
+
+.about-content li {
+    margin-bottom: 0.6rem;
+    line-height: 1.7;
 }
 
 .research-interests {
@@ -276,17 +389,19 @@ p {
 .tag {
     display: inline-block;
     padding: 6px 14px;
-    background: var(--bg-white);
-    color: var(--primary-color);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+    background: var(--accent-tint);
+    color: var(--accent-color);
+    border: 1px solid rgba(31, 78, 121, 0.16);
+    border-radius: 2px;
     font-size: 0.875rem;
     font-weight: 500;
     transition: var(--transition);
 }
 
 .tag:hover {
-    background: var(--bg-grey);
+    background: var(--accent-color);
+    color: var(--bg-white);
+    border-color: var(--accent-color);
 }
 
 /* ==================== */
@@ -299,16 +414,79 @@ p {
 }
 
 .publication-card {
+    position: relative;
     background: var(--bg-white);
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 1.5rem 1.75rem;
     border: 1px solid var(--border-light);
-    border-radius: 5px;
+    border-radius: 2px;
+    transition: var(--transition);
+    overflow: hidden;
+}
+
+/* Category stripe down the left edge, colored by venue type */
+.publication-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--card-accent, var(--accent-color));
+    opacity: 0.75;
     transition: var(--transition);
 }
 
 .publication-card:hover {
-    border-color: var(--accent-color);
+    border-color: var(--card-accent, var(--accent-color));
     box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.publication-card:hover::before {
+    width: 5px;
+    opacity: 1;
+}
+
+/* Venue-type colors, set per card by publications.js */
+.pub-conference { --card-accent: var(--venue-conf);     --card-tint: var(--venue-conf-bg); }
+.pub-journal    { --card-accent: var(--venue-journal);  --card-tint: var(--venue-journal-bg); }
+.pub-workshop   { --card-accent: var(--venue-workshop); --card-tint: var(--venue-workshop-bg); }
+.pub-preprint   { --card-accent: var(--venue-preprint); --card-tint: var(--venue-preprint-bg); }
+
+/* Small category pill in the card header */
+.pub-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 0.6rem;
+    background: var(--card-tint, var(--accent-tint));
+    color: var(--card-accent, var(--accent-color));
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* Year group heading */
+.pub-year {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 1.75rem 0 0.5rem;
+}
+
+.pub-year::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border-color), transparent);
+}
+
+.pub-year:first-child {
+    margin-top: 0;
 }
 
 .publication-card h3 {
@@ -342,7 +520,7 @@ p {
     background: var(--bg-light);
     color: var(--primary-color);
     border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border-radius: 2px;
     font-size: 0.875rem;
     font-weight: 500;
     transition: var(--transition);
@@ -370,13 +548,16 @@ p {
     background: var(--bg-white);
     padding: 1.5rem;
     border: 1px solid var(--border-light);
-    border-radius: 5px;
+    border-left: 3px solid var(--border-color);
+    border-radius: 2px;
     transition: var(--transition);
 }
 
 .experience-card:hover {
-    background: var(--bg-light);
-    border-color: var(--accent-color);
+    border-color: var(--border-light);
+    border-left-color: var(--accent-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
 }
 
 .company-logo {
@@ -388,13 +569,14 @@ p {
     justify-content: center;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: 2px;
     transition: var(--transition);
     overflow: hidden;
 }
 
-.company-logo i {
-    font-size: 3rem;
+.company-logo svg {
+    width: 44px;
+    height: 44px;
     color: var(--secondary-color);
 }
 
@@ -442,6 +624,15 @@ p {
     margin-bottom: 0;
 }
 
+/* One-line focus summary, used where a role would otherwise be
+   indistinguishable from another entry at the same organization */
+.role-note {
+    color: var(--muted-color);
+    font-size: 0.875rem;
+    font-style: italic;
+    margin: 0.35rem 0 0;
+}
+
 .date {
     color: var(--secondary-color);
     font-size: 0.9rem;
@@ -465,13 +656,16 @@ p {
     background: var(--bg-white);
     padding: 1.5rem;
     border: 1px solid var(--border-light);
-    border-radius: 5px;
+    border-left: 3px solid var(--border-color);
+    border-radius: 2px;
     transition: var(--transition);
 }
 
 .education-card:hover {
-    background: var(--bg-white);
-    border-color: var(--accent-color);
+    border-color: var(--border-light);
+    border-left-color: var(--accent-color);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
 }
 
 .school-logo {
@@ -483,13 +677,14 @@ p {
     justify-content: center;
     background: var(--bg-white);
     border: 1px solid var(--border-light);
-    border-radius: 8px;
+    border-radius: 2px;
     transition: var(--transition);
     overflow: hidden;
 }
 
-.school-logo i {
-    font-size: 3rem;
+.school-logo svg {
+    width: 44px;
+    height: 44px;
     color: var(--secondary-color);
 }
 
@@ -557,9 +752,16 @@ p {
 }
 
 .contact-item {
-    background: var(--bg-light);
+    background: linear-gradient(160deg, var(--accent-tint) 0%, var(--bg-light) 100%);
     padding: 1.5rem;
-    border-radius: 5px;
+    border: 1px solid rgba(31, 78, 121, 0.12);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.contact-item:hover {
+    border-color: rgba(31, 78, 121, 0.3);
+    box-shadow: var(--shadow-md);
 }
 
 .contact-item h3 {
@@ -607,9 +809,45 @@ p {
         padding: 0 1.5rem;
     }
 
+    .navbar .container {
+        flex-wrap: wrap;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Collapsed by default; .open reveals a stacked list */
     .nav-menu {
-        gap: 1.25rem;
-        font-size: 0.9rem;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        margin-top: 1rem;
+        border-top: 1px solid var(--border-light);
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid var(--border-light);
+        border-left: 2px solid transparent;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        border-bottom-color: var(--border-light);
+        border-left-color: var(--accent-color);
+        padding-left: 0.75rem;
     }
 
     .hero {
@@ -627,8 +865,8 @@ p {
     }
 
     .hero-image img {
-        width: 150px;
-        height: 150px;
+        width: 160px;
+        height: 200px;
         margin: 0 auto;
     }
 
@@ -663,9 +901,10 @@ p {
         height: 75px;
     }
 
-    .company-logo i,
-    .school-logo i {
-        font-size: 2.2rem;
+    .company-logo svg,
+    .school-logo svg {
+        width: 36px;
+        height: 36px;
     }
 
     .experience-header,
@@ -686,11 +925,6 @@ p {
 @media (max-width: 480px) {
     .container {
         padding: 0 1rem;
-    }
-
-    .nav-menu {
-        gap: 1rem;
-        font-size: 0.85rem;
     }
 
     .nav-brand {
@@ -721,9 +955,10 @@ p {
         height: 65px;
     }
 
-    .company-logo i,
-    .school-logo i {
-        font-size: 1.8rem;
+    .company-logo svg,
+    .school-logo svg {
+        width: 30px;
+        height: 30px;
     }
 
     .social-links {
