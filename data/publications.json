@@ -66,5 +66,14 @@
       "PDF": "https://arxiv.org/pdf/2605.01967",
       "Code": "https://github.com/olivesgatech/MER-DG"
     }
+  },
+  {
+    "title": "SynCo: Learning Cross-Modal Synergy by Contrasting Interaction Residuals",
+    "authors": ["Yavuz Yarici", "Ghassan AlRegib"],
+    "venue": "arXiv preprint",
+    "year": 2026,
+    "links": {
+      "PDF": "https://arxiv.org/pdf/2609.32846"
+    }
   }
 ]
